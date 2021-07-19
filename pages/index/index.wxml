@@ -1,0 +1,181 @@
+<!--index.wxml-->
+<wxs module="filters" src="../../utils/utils.wxs"></wxs>
+<view class="content">
+	<navBar title='首页' background='#e3e7f5' back="{{false}}"></navBar>
+	<mp-tabs tabs="{{tabs}}" dataAllSales="{{dataAllSales}}" dataAllFlow="{{dataAllFlow}}" dataAllMember="{{dataAllMember}}" activeTab="{{activeTab}}" swiperClass="weui-tabs-swiper" bindtabclick="onTabCLick"
+		bindchange="onChange" activeClass="tab-bar-title__selected">
+		<block wx:for="{{tabs}}" wx:key="title">
+			<view class="tab-content" slot="tab-content-{{index}}"> {{item.title}} </view>
+		</block>
+	</mp-tabs>
+	<view class="top">
+		<navigator class="warp-li" url="/pages/indexInfo/indexInfo" hover-class="none">
+			<view class="top-title">
+				<view class="before"></view>
+				<view class="top-title-con">会员数据</view>
+				<view class="after"></view>
+			</view>
+			<view class="banner">
+				<image src="../../images/img_03.png" mode="widthFix"></image>
+				<view class="banner-txt">
+					<view class="banner-top">总会员数</view>
+					<view class="banner-num"><text>{{totalNumberOfMembers}}</text>人</view>
+					<view class="banner-bottom">新增会员数：{{totalNewMumber}}人</view>
+				</view>
+			</view>
+			<view class="bottle">
+				<view class="bt-left">
+					<image src="../../images/index_01.png" mode="widthFix"></image>
+					男性会员数
+				</view>
+				<view class="bt-right"><text>{{totalNumberOfMaleMembers}}</text>人</view>
+			</view>
+			<view class="bottle">
+				<view class="bt-left">
+					<image src="../../images/index_02.png" mode="widthFix"></image>
+					女性会员数
+				</view>
+				<view class="bt-right"><text>{{totalNumberOfFemaleMembers}}</text>人</view>
+			</view>
+			<view class="bottle">
+				<view class="bt-left">
+					<image src="../../images/index_03.png" mode="widthFix"></image>
+					其他会员数
+				</view>
+				<view class="bt-right"><text>{{totalNumberOfOtherMembers}}</text>人</view>
+			</view>
+		</navigator>
+	</view>
+	<view class="top">
+		<navigator class="warp-li" url="/pages/indexinfo3/indexinfo3" hover-class="none">
+			<view class="top-title">
+				<view class="before"></view>
+				<view class="top-title-con">车场数据</view>
+				<view class="after"></view>
+			</view>
+			<view class="bottle">
+				<view class="bt-left">
+					<image src="../../images/index_05.png" mode="widthFix"></image>
+					车辆入
+				</view>
+				<view class="bt-right"><text>{{dayEntryData}}</text>辆</view>
+			</view>
+			<view class="bottle">
+				<view class="bt-left">
+					<image src="../../images/index_04.png" mode="widthFix"></image>
+					车辆出
+				</view>
+				<view class="bt-right"><text>{{dayAppearanceData}}</text>辆</view>
+			</view>
+
+			<view class="bottle">
+				<view class="bt-left">
+					<image src="../../images/index_06.png" mode="widthFix"></image>
+					翻台率
+				</view>
+				<view class="bt-right"><text>{{filters.toFix2(dayEntryData/totalSpace*100)}}%</text></view>
+			</view>
+		</navigator>
+	</view>
+	<view class="top">
+		<navigator class="warp-li" url="/pages/indexinfo1/indexinfo1" hover-class="none">
+			<view class="top-title">
+				<view class="before"></view>
+				<view class="top-title-con">收银数据</view>
+				<view class="after"></view>
+			</view>
+			<view class="top-banner">
+				<image src="../../images/img_01.png" mode="widthFix"></image>
+				<view class="top-txt">
+					<view class="txt-one"><text>{{todaySales}}</text>元</view>
+					<view class="txt-two"><text>今日销售额</text></view>
+				</view>
+			</view>
+			<view class="top-nav">
+				<view class="nav-li">
+					<view><text>{{weekSales}}</text></view>
+					<view>本周销售额</view>
+				</view>
+				<view class="nav-li">
+					<view><text>{{monthSales}}</text></view>
+					<view>本月销售额</view>
+				</view>
+			</view>
+		</navigator>
+		<view class="consumption">
+			<view class="title">
+				<text>当月销售趋势</text>
+			</view>
+			<view class="revenue-list">
+				<view class="charts-con">
+					<view class="charts-tm">销售额（元）</view>
+					<view class="echarts-con">
+						<ec-canvas id="mychart-dom-bar" canvas-id="mychart-line" ec="{{ ec }}"></ec-canvas>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="consumption">
+			<view class="title">
+				<text>近6个月销售趋势</text>
+			</view>
+			<view class="revenue-list">
+				<view class="charts-con">
+					<view class="charts-tm">销售额（万元）</view>
+					<view class="echarts-con">
+						<ec-canvas id="mychart-dom-line" canvas-id="mychart-line" ec="{{ ec1 }}"></ec-canvas>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+	<view class="top">
+		<navigator class="warp-li" url="/pages/indexinfo4/indexinfo4" hover-class="none">
+			<view class="top-title">
+				<view class="before"></view>
+				<view class="top-title-con">商管数据</view>
+				<view class="after"></view>
+			</view>
+			<view class="number">
+				<view class="number-li">
+					<view class="number-dl">
+						<view class="number-dt">本月应收金额</view>
+						<view class="number-dd">{{shoundAmount}}元</view>
+					</view>
+					<view class="number-img">
+						<image src="../../images/qx_1.png" mode="widthFix"></image>
+					</view>
+				</view>
+				<view class="number-li">
+					<view class="number-dl">
+						<view class="number-dt">本月已收金额</view>
+						<view class="number-dd">{{receivableAmount}}元</view>
+					</view>
+					<view class="number-img">
+						<image src="../../images/qx_3.png" mode="widthFix"></image>
+					</view>
+				</view>
+			</view>
+			<view class="bottle">
+				<view class="bt-left">
+					<image src="../../images/index_08.png" mode="widthFix"></image>
+					商场
+				</view>
+				<view class="bt-right"><text>{{marketRevenue}}</text>元</view>
+			</view>
+			<view class="bottle">
+				<view class="bt-left">
+					<image src="../../images/index_07.png" mode="widthFix"></image>
+					街区
+				</view>
+				<view class="bt-right"><text>{{blockIncome}}</text>元</view>
+			</view>
+		</navigator>
+		<view class="lease-con">
+			<view class="echarts-com">
+				<ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec2 }}"></ec-canvas>
+				<!-- <canvas canvas-id="lease-pie" class="lease_pie"></canvas> -->
+			</view>
+		</view>
+	</view>
+</view>

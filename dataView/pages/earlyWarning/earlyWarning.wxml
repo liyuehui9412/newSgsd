@@ -1,0 +1,19 @@
+<!--pages/earlyWarning/earlyWarning.wxml-->
+<view class="content">
+  <navBar title='业态预警' background='#e3e7f5' back="{{true}}" bindback="handlerGobackClick"
+		extClass="lxy-navbar-extclass">
+	</navBar>
+  <view class="warp">
+    <view class="title">
+      <image src="../../../images/icon_33 - 副本.png" mode="widthFix"></image>
+      <text>预警商户占比</text>
+    </view>
+    <view class="list">
+      <view>
+      </view>
+    
+    </view>
+  
+  </view>
+</view>
+

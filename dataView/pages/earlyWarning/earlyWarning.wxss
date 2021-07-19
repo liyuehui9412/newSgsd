@@ -1,0 +1,26 @@
+/* pages/earlyWarning/earlyWarning.wxss */
+page {
+  width: 100%;
+  background-color: #e3e7f5;
+}
+.warp {
+	width: 90%;
+	margin: 0 auto;
+}
+.title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 10rpx;
+  margin-bottom: 10rpx;
+}
+
+.title image {
+  width: 50rpx;
+  margin-right: 20rpx;
+}
+
+.title text {
+  font-size: 30rpx;
+  color: #010101;
+}
